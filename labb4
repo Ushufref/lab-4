@@ -1,0 +1,37 @@
+#вариант 3
+from tkinter import *
+import random
+def make_key():
+    hex = entry.get()
+    dec = int(hex, 16)
+    num_in_dec = [0,0,0,0,0]
+    for i in range(5):
+        num_in_dec[i] = dec%10
+        dec = dec//10
+    key = [0,0,0,0]
+    for i in range(3):
+        key[i] = random.randint(1000,9999)
+        key[i] *= 10
+        key[i] += num_in_dec[i+2]
+    key[3] = num_in_dec[0]*10 + num_in_dec[1]
+    key1 = str(key[0]) + '-' + str(key[1]) + '-' + str(key[2]) + '-' + str(key[3])
+    label["text"] = key1
+
+root = Tk()
+root.geometry('500x330')
+root.resizable(0, 0)
+
+imagee =  PhotoImage(file = "C:\\Users\\fedor\\Downloads\\15-little-nightmares-history (1).png")
+background_label = Label(root, image = imagee)
+background_label.place(x = 0, y = 0, relwidth=1, relheight=1)
+
+knopka = Button(text = "создать ключ", command=make_key, padx=10, pady=10)
+knopka.pack(pady=40)
+
+entry = Entry(root)
+entry.pack(anchor=W, padx=50, pady=60)
+entry.insert(0,'поле ввода')
+
+label = Label()
+label.pack(anchor=W, padx=40)
+root.mainloop()
